@@ -99,7 +99,7 @@ namespace MultiplayerARPG
             AttackComponent.CancelAttack();
             UseSkillComponent.CancelSkill();
             UseSkillComponent.InterruptCastingSkill();
-            PlayCustomAnimation(0, true);
+            PlayableCharacterModel.PlayKnockdownAnimation(true);
             yield return new WaitForSeconds(5);
             StopCustomAnimation();
             IsKnockdown = false;
