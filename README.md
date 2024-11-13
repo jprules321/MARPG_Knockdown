@@ -14,7 +14,7 @@ You will need to put the overrides from <<CustomPlayerCharacterEntity_Knockdown.
 
 ## TODO
 
-- Add a dedicated animation slot for Knockdown. Right now it uses Slot 0 in CustomAnimation array.
+- ~~Add a dedicated animation slot for Knockdown. Right now it uses Slot 0 in CustomAnimation array.~~
 - Add Knockdown duration to gameplay rule (Right now is hardcoded to 5 seconds in Knockdown Coroutine
 - Add Reduce Knockdown time stat
 
