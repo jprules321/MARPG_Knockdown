@@ -13,12 +13,14 @@ namespace MultiplayerARPG
         [SerializeField]
         protected SyncFieldBool isKnockdown = new SyncFieldBool();
 
+        [SerializeField]
+        protected SyncFieldFloat nextKnockdownTime = new SyncFieldFloat();
 
         public event System.Action<bool> OnIsKnockdownChange;
         public bool IsKnockdown { get { return isKnockdown.Value; } set { isKnockdown.Value = value; } }
+        public float NextKnockdownTime { get { return nextKnockdownTime.Value; } set { nextKnockdownTime.Value = value; } }
 
         protected PlayableCharacterModel PlayableCharacterModel => Model as PlayableCharacterModel;
-
 
         [DevExtMethods("Awake")]
         protected void CustomKnockdownAwake()
@@ -28,6 +30,7 @@ namespace MultiplayerARPG
             onReceivedDamage += OnReceivedDamageKnockdown;
             onDead.AddListener(OnDeadKnockdown);
             onCanMoveValidated += CustomKnockdownCanMoveValidated;
+            NextKnockdownTime = Time.unscaledTime;
         }
 
         [DevExtMethods("OnDestroy")]
@@ -55,6 +58,9 @@ namespace MultiplayerARPG
         {
             isKnockdown.deliveryMethod = DeliveryMethod.ReliableOrdered;
             isKnockdown.syncMode = LiteNetLibSyncField.SyncMode.ServerToClients;
+
+            nextKnockdownTime.deliveryMethod = DeliveryMethod.ReliableOrdered;
+            nextKnockdownTime.syncMode = LiteNetLibSyncField.SyncMode.ServerToClients;
 
         }
 
@@ -87,7 +93,10 @@ namespace MultiplayerARPG
             if (attacker is not BaseCharacterEntity _attacker)
                 return;
 
-            IsKnockdown = Random.value <= CurrentGameplayRule.GetKnockdownChance(_attacker);
+            if (Time.unscaledTime > NextKnockdownTime)
+                IsKnockdown = Random.value <= CurrentGameplayRule.GetKnockdownChance(_attacker);
+
+            
             
         }
 
@@ -99,10 +108,12 @@ namespace MultiplayerARPG
             AttackComponent.CancelAttack();
             UseSkillComponent.CancelSkill();
             UseSkillComponent.InterruptCastingSkill();
-            PlayableCharacterModel.PlayKnockdownAnimation(true);
-            yield return new WaitForSeconds(5);
+            PlayableCharacterModel.PlayCustomAnimation(0, true);
+            
+            yield return new WaitForSeconds(CurrentGameplayRule.GetKnockdownDuration(this));
             StopCustomAnimation();
             IsKnockdown = false;
+            NextKnockdownTime = Time.unscaledTime + CurrentGameplayRule.GetKnockdownCooldown(this);
         }
 
   

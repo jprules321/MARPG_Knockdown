@@ -11,6 +11,7 @@ namespace MultiplayerARPG
         static void CloneTo_Knockdown(IPlayerCharacterData from, IPlayerCharacterData to)
         {
             to.IsKnockdown = from.IsKnockdown;
+            to.NextKnockdownTime = from.NextKnockdownTime;
         }
 
         [DevExtMethods("SerializeCharacterData")]
@@ -18,6 +19,7 @@ namespace MultiplayerARPG
         {
 
             writer.Put(characterData.IsKnockdown);
+            writer.Put(characterData.NextKnockdownTime);
           
         }
 
@@ -27,6 +29,7 @@ namespace MultiplayerARPG
         {
 
             characterData.IsKnockdown = reader.GetBool();
+            characterData.NextKnockdownTime = reader.GetFloat();
           
         }
     }

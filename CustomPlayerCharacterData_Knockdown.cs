@@ -6,6 +6,7 @@ namespace MultiplayerARPG
     {
         
        public bool IsKnockdown { get; set; }
+       public float NextKnockdownTime { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ namespace MultiplayerARPG.GameData.Model.Playables
 {
     public partial class PlayableCharacterModel
     {
-        [Header("Custom Animations")]
+        [Header("Knockdown Animations")]
         [Tooltip("Knockdown Custom Animations")]
         public ActionState knockdownAnimation;
 
