@@ -14,6 +14,7 @@ You will need to put the overrides from <<CustomPlayerCharacterEntity_Knockdown.
 - Knockdown Cooldown Stat (How long before your character can be knocked down again after getting up) You can increase or decrease this with Buff and debuff or stat gears.
 - Knockdown Duration (How long your character gets knocked for in seconds ) You can increase or decrease this with Buff and debuff or stat gears.
 - New gameplay rules related to Knockdown
+- Control weapon or skill knockdown capability
 
 ## TODO
 
