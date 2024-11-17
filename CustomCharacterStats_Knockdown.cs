@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace MultiplayerARPG
 {
-    [System.Serializable]
     public partial struct CharacterStats
     {
         [Tooltip("How long in seconds before you can be knocked down again after getting up")]

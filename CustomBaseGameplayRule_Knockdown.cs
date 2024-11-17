@@ -19,10 +19,8 @@ namespace MultiplayerARPG
         {
             CharacterStats attackerStats = attacker.GetCaches().Stats;
             float knockdownChance = attackerStats.knockdownChance;
-            // Minimum knockdown chance is 1%
             if (knockdownChance < 0.01f)
                 knockdownChance = 0.01f;
-            // Maximum knockdown chance is 30%
             if (knockdownChance > maxKnockdownChance)
                 knockdownChance = maxKnockdownChance;
             return knockdownChance;

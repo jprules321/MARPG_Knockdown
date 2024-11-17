@@ -90,7 +90,14 @@ namespace MultiplayerARPG
 
             if (IsKnockdown)
                 return;
+
             if (attacker is not BaseCharacterEntity _attacker)
+                return;
+
+            if (skill == null && !weapon.CanKnockdown())
+                return;
+
+            if (skill != null && !skill.canKnockdown)
                 return;
 
             if (Time.unscaledTime > NextKnockdownTime)
